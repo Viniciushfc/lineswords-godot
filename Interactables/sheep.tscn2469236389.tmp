@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8m8y6vksohim"]
+
+[ext_resource type="Script" uid="uid://dujkv0ivx2yw1" path="res://Interactables/sheep.gd" id="1_s3664"]
+[ext_resource type="Texture2D" uid="uid://bhx4mtnq4i2pi" path="res://Resources/Sheep/HappySheep_All.png" id="1_v78kd"]
+[ext_resource type="PackedScene" uid="uid://bojoske67lbfx" path="res://Effects/dust.tscn" id="3_04rcf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v78kd"]
+radius = 7.0
+height = 36.0
+
+[sub_resource type="Animation" id="Animation_s3664"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_04rcf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_v78kd"]
+resource_name = "Walk"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6luyy"]
+_data = {
+&"Idle": SubResource("Animation_s3664"),
+&"RESET": SubResource("Animation_04rcf"),
+&"Walk": SubResource("Animation_v78kd")
+}
+
+[node name="Sheep" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_animation", "_walk_timer", "_run_timer", "_dust")]
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_s3664")
+_sprite = NodePath("Texture")
+_animation = NodePath("Animation")
+_walk_timer = NodePath("WalkTimer")
+_run_timer = NodePath("RunTimer")
+_dust = NodePath("Dust")
+
+[node name="Texture" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_v78kd")
+hframes = 8
+vframes = 2
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_v78kd")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6luyy")
+}
+autoplay = "Idle"
+
+[node name="WalkTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Dust" parent="." instance=ExtResource("3_04rcf")]
+
+[connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="RunTimer" to="." method="_on_run_timer_timeout"]

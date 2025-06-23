@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://wgn0w4lvghrh"]
+
+[ext_resource type="PackedScene" uid="uid://7x50sfg5h5hl" path="res://Decoration/decoration_component.tscn" id="1_30888"]
+
+[node name="Bones" instance=ExtResource("1_30888")]
+y_sort_enabled = true
+_textures_list = Array[String](["res://Decoration/Bones/14.png", "res://Decoration/Bones/15.png"])

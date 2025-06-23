@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2teoaaxeuils"]
+
+[ext_resource type="Script" uid="uid://duh7sf2nsoant" path="res://pause_menu.gd" id="1_jfm1e"]
+[ext_resource type="Theme" uid="uid://dncsr5ctw7if6" path="res://UI/default_btn.tres" id="2_03fe5"]
+[ext_resource type="AudioStream" uid="uid://cpkkcv43fqrlp" path="res://Sounds/161700__xserra__ocean-3.wav" id="3_03fe5"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_jfm1e")
+
+[node name="BgOverlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 0.160784)
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+offset_left = 1367.0
+offset_top = 692.0
+offset_right = 1587.0
+offset_bottom = 852.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="BoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="HSliderMusic" type="HSlider" parent="BoxContainer/VBoxContainer/Control"]
+layout_mode = 2
+offset_left = -452.0
+offset_top = -121.0
+offset_right = -278.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+min_value = -80.0
+max_value = 20.0
+
+[node name="Label" type="Label" parent="BoxContainer/VBoxContainer/Control/HSliderMusic"]
+layout_mode = 2
+offset_top = -27.0
+offset_right = 174.0
+offset_bottom = -4.0
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="Waves" type="AudioStreamPlayer" parent="BoxContainer/VBoxContainer/Control/HSliderMusic"]
+stream = ExtResource("3_03fe5")
+volume_db = -18.0
+autoplay = true
+
+[node name="MenuHolder" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.0
+offset_top = -52.0
+offset_right = 87.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ResumeBtn" type="Button" parent="MenuHolder"]
+layout_mode = 2
+theme = ExtResource("2_03fe5")
+text = "RESUME"
+
+[node name="SaveBtn" type="Button" parent="MenuHolder"]
+layout_mode = 2
+theme = ExtResource("2_03fe5")
+text = "SAVE-GAME"
+
+[node name="QuitBtn" type="Button" parent="MenuHolder"]
+layout_mode = 2
+theme = ExtResource("2_03fe5")
+text = "QUIT GAME"
+
+[connection signal="value_changed" from="BoxContainer/VBoxContainer/Control/HSliderMusic" to="." method="_on_h_slider_music_value_changed"]
+[connection signal="pressed" from="MenuHolder/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MenuHolder/SaveBtn" to="." method="_on_save_btn_pressed"]
+[connection signal="pressed" from="MenuHolder/SaveBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MenuHolder/QuitBtn" to="." method="_on_quit_btn_pressed"]

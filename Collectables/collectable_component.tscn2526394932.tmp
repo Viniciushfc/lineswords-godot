@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmlqm5xiblwmj"]
+
+[ext_resource type="Script" uid="uid://elupnq430vua" path="res://Collectables/collectable_component.gd" id="1_mpobj"]
+
+[node name="CollectableComponent" type="Area2D"]
+script = ExtResource("1_mpobj")
+
+[node name="Textura" type="Sprite2D" parent="."]
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Textura")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

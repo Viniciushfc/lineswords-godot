@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=3 uid="uid://br4pebjij0nsc"]
+
+[ext_resource type="Script" uid="uid://c1hsoor2ambqy" path="res://Factions/Knights/Troops/Dead/boss_dead.gd" id="1_smei8"]
+[ext_resource type="Texture2D" uid="uid://3hsjrn0endjd" path="res://Factions/Knights/Troops/Dead/Dead_anin.png" id="2_smei8"]
+[ext_resource type="PackedScene" uid="uid://bojoske67lbfx" path="res://Effects/dust.tscn" id="3_sh5c3"]
+
+[sub_resource type="Animation" id="Animation_sh5c3"]
+resource_name = "Idle"
+length = 0.9
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 7]
+}
+
+[sub_resource type="Animation" id="Animation_mkpd7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_smei8"]
+resource_name = "Hit"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 18]
+}
+
+[sub_resource type="Animation" id="Animation_mr3mq"]
+resource_name = "dead"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mr3mq"]
+_data = {
+&"Hit": SubResource("Animation_smei8"),
+&"Idle": SubResource("Animation_sh5c3"),
+&"RESET": SubResource("Animation_mkpd7"),
+&"dead": SubResource("Animation_mr3mq")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smei8"]
+size = Vector2(64, 87)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sh5c3"]
+radius = 67.1863
+
+[node name="BossDead" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_animation", "_walk_timer", "_run_timer", "_dust")]
+platform_on_leave = 2
+script = ExtResource("1_smei8")
+_move_speed = 80.0
+_sprite = NodePath("Texture")
+_animation = NodePath("Animation")
+_walk_timer = NodePath("WalkTimer")
+_run_timer = NodePath("RunTimer")
+_dust = NodePath("Dust")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mr3mq")
+}
+
+[node name="WalkTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(2, -53.5)
+shape = SubResource("RectangleShape2D_smei8")
+
+[node name="Texture" type="Sprite2D" parent="."]
+position = Vector2(5.87501, -65.75)
+scale = Vector2(3.07188, 2.45625)
+texture = ExtResource("2_smei8")
+hframes = 12
+vframes = 4
+
+[node name="Dust" parent="." instance=ExtResource("3_sh5c3")]
+position = Vector2(2, 3)
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(3, -55)
+shape = SubResource("CircleShape2D_sh5c3")
+
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="RunTimer" to="." method="_on_run_timer_timeout"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

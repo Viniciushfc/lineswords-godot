@@ -1,0 +1,270 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqqtmswjvdqpq"]
+
+[ext_resource type="Script" uid="uid://yiifkm32odfg" path="res://UI/title_screen.gd" id="1_5whv5"]
+[ext_resource type="Theme" uid="uid://dncsr5ctw7if6" path="res://UI/default_btn.tres" id="2_5whv5"]
+[ext_resource type="Texture2D" uid="uid://cjeehqjla2707" path="res://UI/background_oficial.png" id="2_816ia"]
+[ext_resource type="AudioStream" uid="uid://behe3spyl1bl1" path="res://Sounds/577489__tyops__mystery-adventure-intro.wav" id="4_816ia"]
+
+[sub_resource type="Animation" id="Animation_udsnl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.864803, 0.352267, 0.108371, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer:clip_contents")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_tuktx"]
+resource_name = "config_open"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer:clip_contents")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_816ia"]
+resource_name = "fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(0.864803, 0.352267, 0.108371, 1), Color(0.866667, 0.352941, 0.109804, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tuktx"]
+_data = {
+&"RESET": SubResource("Animation_udsnl"),
+&"config_open": SubResource("Animation_tuktx"),
+&"fade": SubResource("Animation_816ia")
+}
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5whv5")
+game_scene = "res://game_level.tscn"
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -581.0
+offset_top = -321.0
+offset_right = 577.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_816ia")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = 116.0
+offset_right = 101.5
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="StartBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5whv5")
+text = "START"
+
+[node name="SavesGame" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5whv5")
+text = "SAVESGAME"
+
+[node name="QuitBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5whv5")
+text = "QUIT"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 76.0
+offset_right = 475.0
+offset_bottom = 204.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Control" type="Control" parent="MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer2/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.5
+offset_right = 47.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Digite Seu Nick"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer2/VBoxContainer2/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.5
+offset_top = 37.0
+offset_right = 47.5
+offset_bottom = 68.0
+grow_horizontal = 2
+
+[node name="Button" type="Button" parent="MarginContainer2/VBoxContainer2/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.5
+offset_top = 77.0
+offset_right = 47.5
+offset_bottom = 108.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0705882, 0.501961, 0.498039, 1)
+text = "Save
+"
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_left = 262.0
+offset_top = 164.0
+offset_right = 563.0
+offset_bottom = 292.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer3"]
+layout_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="MarginContainer3/VBoxContainer"]
+
+[node name="Control" type="Control" parent="MarginContainer3/VBoxContainer/CanvasLayer"]
+layout_mode = 3
+anchor_left = -0.00173611
+anchor_right = -0.00173611
+anchor_bottom = 0.0817901
+offset_left = 970.0
+offset_top = 506.0
+offset_right = 1010.0
+offset_bottom = 546.0
+size_flags_horizontal = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="MarginContainer3/VBoxContainer/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 14.85
+anchor_top = -1.7
+anchor_right = 14.85
+anchor_bottom = -1.7
+offset_left = -615.0
+offset_top = 184.0
+offset_right = -556.0
+offset_bottom = 207.0
+text = "Volume"
+metadata/_edit_use_anchors_ = true
+
+[node name="HSliderMusic" type="HSlider" parent="MarginContainer3/VBoxContainer/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 14.85
+anchor_top = -1.7
+anchor_right = 14.85
+anchor_bottom = -1.7
+offset_left = -719.0
+offset_top = 223.0
+offset_right = -422.0
+offset_bottom = 242.0
+min_value = -80.0
+max_value = 20.0
+metadata/_edit_use_anchors_ = true
+
+[node name="MusicaHome" type="AudioStreamPlayer" parent="MarginContainer3/VBoxContainer/CanvasLayer"]
+stream = ExtResource("4_816ia")
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -581.0
+offset_top = -321.0
+offset_right = 577.0
+offset_bottom = 324.0
+color = Color(0.864803, 0.352267, 0.108371, 1)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tuktx")
+}
+autoplay = "fade"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/SavesGame" to="." method="_on_saves_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
+[connection signal="pressed" from="MarginContainer2/VBoxContainer2/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="MarginContainer3/VBoxContainer/CanvasLayer/Control/HSliderMusic" to="." method="_on_h_slider_music_value_changed"]
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]
