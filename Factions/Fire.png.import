@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgf068v408qsw"
-path="res://.godot/imported/HUD_Boss.png-73624d8912a62dba37a7789f83d0a1cf.ctex"
+uid="uid://cr5verubcsioj"
+path="res://.godot/imported/Fire.png-88e6368a5e21ca953ddd9b8b554d682a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Factions/Knights/Troops/Dead/HUD_Boss.png"
-dest_files=["res://.godot/imported/HUD_Boss.png-73624d8912a62dba37a7789f83d0a1cf.ctex"]
+source_file="res://Factions/Fire.png"
+dest_files=["res://.godot/imported/Fire.png-88e6368a5e21ca953ddd9b8b554d682a.ctex"]
 
 [params]
 

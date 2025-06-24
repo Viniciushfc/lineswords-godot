@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqf7nygoftiq6"]
+
+[ext_resource type="Theme" uid="uid://dncsr5ctw7if6" path="res://UI/default_btn.tres" id="1_kjexa"]
+[ext_resource type="Script" uid="uid://b3j1y1o2akc5o" path="res://UI/game_over.gd" id="1_vjbsa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vjbsa"]
+font_size = 60
+font_color = Color(0.894118, 0, 0, 1)
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjbsa")
+
+[node name="BgOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 0.160784)
+
+[node name="Label" type="Label" parent="BgOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.5
+offset_top = -121.5
+offset_right = 162.5
+offset_bottom = -38.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_vjbsa")
+horizontal_alignment = 1
+
+[node name="MenuHolder" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -200.0
+offset_right = 87.0
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ResumeBtn" type="Button" parent="MenuHolder"]
+layout_mode = 2
+theme = ExtResource("1_kjexa")
+text = "RESUME"
+
+[node name="QuitBtn" type="Button" parent="MenuHolder"]
+layout_mode = 2
+theme = ExtResource("1_kjexa")
+text = "QUIT GAME"
+
+[connection signal="pressed" from="MenuHolder/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="MenuHolder/QuitBtn" to="." method="_on_quit_btn_pressed"]

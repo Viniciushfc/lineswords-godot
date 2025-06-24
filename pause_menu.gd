@@ -4,8 +4,6 @@ extends CanvasLayer
 @onready var h_slider_music: HSlider = $BoxContainer/VBoxContainer/Control/HSliderMusic
 @onready var waves: AudioStreamPlayer = $BoxContainer/VBoxContainer/Control/HSliderMusic/Waves
 
-
-
 func _ready() -> void:
 	visible = false
 	

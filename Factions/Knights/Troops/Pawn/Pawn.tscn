@@ -142,6 +142,7 @@ radius = 64.0
 
 [node name="Pawn" node_paths=PackedStringArray("_attack_area_collision") instance=ExtResource("1_y7yw8")]
 _attack_area_collision = NodePath("AttackArea/Collision")
+_max_attack = 10
 
 [node name="Texture" parent="." index="0"]
 position = Vector2(0, -26)

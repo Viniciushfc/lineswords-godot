@@ -32,15 +32,18 @@ func _physics_process(_delta: float) -> void:
 
 func _move() -> void:
 	var _direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
+
 	_dust.emitting = false
-	
+
+	var speed_multiplier: float = 1.0
+	if Input.is_action_pressed("run"):
+		speed_multiplier = 2  
+
 	if _direction:
 		_dust.emitting = true
-	velocity = _direction * _move_speed
-	move_and_slide()
-	
 
+	velocity = _direction * _move_speed * speed_multiplier
+	move_and_slide()
 
 
 func take_damage(damage: int) -> void:
@@ -53,7 +56,16 @@ func take_damage(damage: int) -> void:
 
 		
 func die() -> void:
-	_spawn_particles() 
+	set_physics_process(false)
+	set_process(false)
+	
+	_sprite2D.visible = false
+	health_bar.visible = false
+
+	_spawn_particles()
+	await get_tree().create_timer(2.0).timeout
+
+	_game_over()
 
 func _update_health_bar() -> void:
 	if health_bar:
@@ -129,4 +141,8 @@ func _spawn_particles() -> void:
 	_hit.global_position = global_position
 	_hit.modulate = Color.RED
 	_hit.emitting = true
-	get_tree().root.call_deferred("add_child", _hit)
+	get_tree().current_scene.add_child(_hit)
+	
+	
+func _game_over() -> void:
+	get_tree().change_scene_to_file("res://UI/GameOver.tscn")

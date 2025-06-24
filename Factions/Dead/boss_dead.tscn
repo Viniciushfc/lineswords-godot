@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://br4pebjij0nsc"]
 
-[ext_resource type="Script" uid="uid://c1hsoor2ambqy" path="res://Factions/Knights/Troops/Dead/boss_dead.gd" id="1_smei8"]
-[ext_resource type="Texture2D" uid="uid://3hsjrn0endjd" path="res://Factions/Knights/Troops/Dead/Dead_anin.png" id="2_smei8"]
+[ext_resource type="Script" uid="uid://c1hsoor2ambqy" path="res://Factions/Dead/boss_dead.gd" id="1_smei8"]
+[ext_resource type="Texture2D" uid="uid://c7uovcl1laq8" path="res://Factions/Dead_anin.png" id="2_sh5c3"]
 [ext_resource type="PackedScene" uid="uid://bojoske67lbfx" path="res://Effects/dust.tscn" id="3_sh5c3"]
 
 [sub_resource type="Animation" id="Animation_smei8"]
@@ -82,17 +82,20 @@ _data = {
 size = Vector2(64, 87)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sh5c3"]
-radius = 67.1863
+radius = 91.0055
 
 [node name="BossDead" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_animation", "_walk_timer", "_run_timer", "_dust")]
 platform_on_leave = 2
 script = ExtResource("1_smei8")
 _move_speed = 80.0
+_min_health = 100
+_max_health = 100
 _sprite = NodePath("Texture")
 _animation = NodePath("Animation")
 _walk_timer = NodePath("WalkTimer")
 _run_timer = NodePath("RunTimer")
 _dust = NodePath("Dust")
+attack_cooldown = 1.0
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -112,7 +115,7 @@ shape = SubResource("RectangleShape2D_smei8")
 [node name="Texture" type="Sprite2D" parent="."]
 position = Vector2(5.87501, -65.75)
 scale = Vector2(3.07188, 2.45625)
-texture = ExtResource("2_smei8")
+texture = ExtResource("2_sh5c3")
 hframes = 12
 vframes = 4
 

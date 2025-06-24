@@ -14,7 +14,7 @@ var _regular_move_speed: float
 
 @export_category("Variables")
 @export var _move_speed: float = 128.0
-@export var _min_health: int = 5
+@export var _min_health: int = 80
 @export var _max_health: int = 15
 
 @export_category("Objects")
@@ -118,5 +118,5 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		body.take_damage(attack_damage) 
 		print("Acertou o player!")
 		_animation.play("Hit")
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(1.0).timeout
 		can_attack = true

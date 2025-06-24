@@ -748,14 +748,25 @@ position = Vector2(1952, 816)
 [node name="Sheep2" parent="Decoration" instance=ExtResource("13_vugdd")]
 position = Vector2(2208, 1064)
 
+[node name="Sheep4" parent="Decoration" instance=ExtResource("13_vugdd")]
+position = Vector2(3528, 834)
+
+[node name="Sheep5" parent="Decoration" instance=ExtResource("13_vugdd")]
+position = Vector2(3528, 834)
+
+[node name="Sheep6" parent="Decoration" instance=ExtResource("13_vugdd")]
+position = Vector2(3648, 345)
+
 [node name="Sheep3" parent="Decoration" instance=ExtResource("13_vugdd")]
 position = Vector2(1584, 816)
 
 [node name="Pawn" parent="Decoration" instance=ExtResource("2_ibsu8")]
-position = Vector2(6973, 682)
+position = Vector2(558, 624)
 platform_on_leave = 0
 platform_floor_layers = 4294967295
-_max_attack = 10
+
+[node name="BossDead" parent="Decoration" instance=ExtResource("18_gyjtv")]
+position = Vector2(7030, 609)
 
 [node name="GoldMine" parent="Decoration" instance=ExtResource("14_gm1p2")]
 position = Vector2(2736, 904)
@@ -969,9 +980,6 @@ position = Vector2(1187, 992)
 
 [node name="Rocks10" parent="Decoration2/RockAll/RockGroup" instance=ExtResource("9_jpbmx")]
 position = Vector2(211, 828)
-
-[node name="BossDead" parent="Decoration2" instance=ExtResource("18_gyjtv")]
-position = Vector2(1043, 477)
 
 [node name="DayNightCycle" type="CanvasModulate" parent="."]
 
