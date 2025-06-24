@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=4 uid="uid://ch2uo612nneby"]
+[gd_scene load_steps=25 format=4 uid="uid://ch2uo612nneby"]
 
 [ext_resource type="PackedScene" uid="uid://60p1i6d0n8op" path="res://Terrenos/terreno_manager.tscn" id="1_df5pp"]
-[ext_resource type="PackedScene" uid="uid://d0kc6gpfwjdfk" path="res://UI/GameOver.tscn" id="1_ssom1"]
 [ext_resource type="PackedScene" uid="uid://76smp11i6r57" path="res://Factions/Knights/Troops/Pawn/Pawn.tscn" id="2_ibsu8"]
 [ext_resource type="Texture2D" uid="uid://cd0prp0yevp4q" path="res://Terrenos/Terrain/Bridge/Bridge_All.png" id="3_ibsu8"]
 [ext_resource type="Script" uid="uid://buf3cgfsigncb" path="res://Interactables/bridge_area.gd" id="3_qsd0w"]
@@ -88,12 +87,6 @@ _data = {
 }
 
 [node name="GameLevel" type="Node2D"]
-
-[node name="Control" parent="." instance=ExtResource("1_ssom1")]
-offset_left = 7037.0
-offset_top = 682.0
-offset_right = 7037.0
-offset_bottom = 682.0
 
 [node name="Terreno" parent="." instance=ExtResource("1_df5pp")]
 
@@ -762,9 +755,6 @@ position = Vector2(1584, 816)
 position = Vector2(6973, 682)
 platform_on_leave = 0
 platform_floor_layers = 4294967295
-max_health = 100
-_move_speed = 130.0
-_min_attack = 5
 _max_attack = 10
 
 [node name="GoldMine" parent="Decoration" instance=ExtResource("14_gm1p2")]

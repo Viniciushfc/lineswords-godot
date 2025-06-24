@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name BaseCharacter
 
+
+const _HIT_PARTICLES: PackedScene = preload("res://Effects/hit_particles.tscn")
+
 var _can_attack: bool = true
 var _attack_animation_name: String = ""
 
@@ -18,6 +21,8 @@ var _attack_animation_name: String = ""
 @export var _sprite2D: Sprite2D
 @export var _dust: CPUParticles2D
 @export var current_health: int = max_health
+
+@onready var health_bar: ProgressBar = $ProgressBar
 
 func _physics_process(_delta: float) -> void:
 	_move()
@@ -40,14 +45,20 @@ func _move() -> void:
 
 func take_damage(damage: int) -> void:
 	current_health -= damage
+	current_health = max(current_health, 0)
+	_update_health_bar()
 
 	if current_health <= 0:
 		die()
 
 		
 func die() -> void:
-	queue_free()  
+	_spawn_particles() 
 
+func _update_health_bar() -> void:
+	if health_bar:
+		health_bar.max_value = max_health
+		health_bar.value = current_health
 
 func _attack() -> void:
 	if Input.is_action_just_pressed("left_attack") and _can_attack:
@@ -76,7 +87,7 @@ func _animate() -> void:
 		return
 		
 	if velocity:
-		_animation.play("Idle")
+		_animation.play("Run")
 		return
 		
 	_animation.play("Idle")
@@ -113,3 +124,9 @@ func _on_attack_area_body_entered(_body: Node2D) -> void:
 		):
 		_body.update_health([_min_attack, _max_attack])
 		
+func _spawn_particles() -> void:
+	var _hit = _HIT_PARTICLES.instantiate()
+	_hit.global_position = global_position
+	_hit.modulate = Color.RED
+	_hit.emitting = true
+	get_tree().root.call_deferred("add_child", _hit)

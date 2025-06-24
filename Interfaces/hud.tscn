@@ -17,6 +17,8 @@ shader_parameter/SOFTNESS = 0.6
 
 [node name="HUD" type="CanvasLayer"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
 [node name="CanvasLayerUIPlayer" type="CanvasLayer" parent="."]
 script = ExtResource("5_ymjf2")
 

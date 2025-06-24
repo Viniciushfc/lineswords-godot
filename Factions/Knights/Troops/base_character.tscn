@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcsvouqy1535v"]
+[gd_scene load_steps=7 format=3 uid="uid://bcsvouqy1535v"]
 
 [ext_resource type="Script" uid="uid://c4wxrheecaifl" path="res://Factions/Knights/Troops/base_character.gd" id="1_jdal0"]
 [ext_resource type="PackedScene" uid="uid://bojoske67lbfx" path="res://Effects/dust.tscn" id="2_6c5of"]
 [ext_resource type="AudioStream" uid="uid://bbyq7ee8hecun" path="res://Sounds/walk-on-grass-1-291984.mp3" id="3_qodcm"]
 [ext_resource type="AudioStream" uid="uid://dihi4emb67vsd" path="res://Sounds/sand-walk-106366.mp3" id="4_g8qi7"]
+
+[sub_resource type="Theme" id="Theme_g8qi7"]
+ProgressBar/colors/font_color = Color(1, 1, 1, 1)
+ProgressBar/font_sizes/font_size = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmgeo"]
+bg_color = Color(0.856494, 3.65794e-06, 8.66354e-07, 1)
 
 [node name="BaseCharacter" type="CharacterBody2D" node_paths=PackedStringArray("_animation", "_sprite2D", "_dust") groups=["player"]]
 collision_layer = 9
@@ -36,6 +43,25 @@ stream = ExtResource("3_qodcm")
 
 [node name="step_sand" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_g8qi7")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = -82.0
+offset_right = 58.0
+offset_bottom = -62.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_g8qi7")
+theme_override_styles/background = SubResource("StyleBoxFlat_cmgeo")
+step = 1.0
+value = 100.0
 
 [connection signal="animation_finished" from="Animation" to="." method="_on_animation_finished"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
